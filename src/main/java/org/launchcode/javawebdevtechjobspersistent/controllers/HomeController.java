@@ -50,7 +50,8 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         } else {
-            newJob.setEmployer(employerRepository.findById(employerId));
+            Optional<Employer> employer = employerRepository.findById(employerId);
+            newJob.setEmployer(employer.get());
             jobRepository.save(newJob);
             return "redirect:";
         }
@@ -59,6 +60,14 @@ public class HomeController {
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
+
+        Optional<Job> job = jobRepository.findById(jobId);
+
+        if (job.isEmpty()) {
+            model.addAttribute("title", "Invalid Event ID: " + jobId);
+        } else {
+
+        }
 
         return "view";
     }
