@@ -61,9 +61,10 @@ public class HomeController {
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
 
-        Optional<Job> job = jobRepository.findById(jobId);
+        model.addAttribute("job", jobRepository.findById(jobId).get());
 
-        if (job.isEmpty()) {
+        if (jobRepository.findById(jobId).isEmpty()) {
+            model.addAttribute("title", "Job ID does not exist");
             return "redirect:";
         } else {
             return "view";
