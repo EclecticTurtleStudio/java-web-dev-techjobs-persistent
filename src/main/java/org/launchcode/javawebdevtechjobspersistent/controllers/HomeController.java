@@ -64,12 +64,12 @@ public class HomeController {
         Optional<Job> job = jobRepository.findById(jobId);
 
         if (job.isEmpty()) {
-            model.addAttribute("title", "Invalid Event ID: " + jobId);
+            return "redirect:";
         } else {
-
+            return "view";
         }
 
-        return "view";
+
     }
 
 
