@@ -63,7 +63,7 @@ public class HomeController {
 
         if (jobRepository.findById(jobId).isEmpty()) {
             model.addAttribute("title", "Job ID does not exist");
-            return "redirect:/..";
+            return "redirect:..";
         } else {
             model.addAttribute("job", jobRepository.findById(jobId).get());
             return "view";
